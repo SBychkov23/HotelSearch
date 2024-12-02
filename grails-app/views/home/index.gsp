@@ -2,7 +2,8 @@
 <html>
 <head>
     <meta name="layout" content="main"/>
-    <title>Welcome to Grails</title>
+    <link rel="stylesheet" href="${resource(dir: 'css', file: 'search-form.css')}" type="text/css">
+    <title>Hotel Search</title>
 </head>
 <body>
 
@@ -17,7 +18,7 @@
     <div id="content" role="main">
         <section class="row colset-2-its">
             <h1>Поиск</h1>
-            <g:form controller="home" action="searchResults">
+            <g:form class="searchContainer" controller="home" action="searchResults">
                      <g:textField name="hotelName" value="${hotelName}" />
                         <g:select name="countryName" value="${countryName}" from="${countryList}" optionKey="countryName" />
                            <input type="submit" value="Поиск">
@@ -42,7 +43,7 @@
                             <td>${it.hotelName}</td>
                             <td>${it.hotelRating}</td>
                             <g:if test="${it.webSite!=null}">
-                            <td><g:link base="${it.webSite}">Перейти на сайт</g:link></td>
+                            <td><a href=${it.webSite} target="_blank">Перейти на сайт</a></td>
                             </g:if>
                         </tr>
                     </g:each>

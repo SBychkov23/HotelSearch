@@ -14,7 +14,7 @@
             </ul>
         </div>
         <div id="create-country" class="content scaffold-create" role="main">
-            <h1><g:message code="default.create.label" args="[entityName]" /></h1>
+            <h1><g:message code="Добавить информацию о стране" args="[entityName]" /></h1>
             <g:if test="${flash.message}">
             <div class="message" role="status">${flash.message}</div>
             </g:if>
@@ -30,7 +30,7 @@
                     <f:all bean="country"/>
                 </fieldset>
                 <fieldset class="buttons">
-                    <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
+                    <g:submitButton name="create" class="save" value="${message(code: 'Добавить страну', default: 'Добавить страну')}" />
                 </fieldset>
             </g:form>
         </div>
