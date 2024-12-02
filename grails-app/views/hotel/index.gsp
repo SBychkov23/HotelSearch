@@ -9,20 +9,45 @@
         <a href="#list-hotel" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
         <div class="nav" role="navigation">
             <ul>
-                <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-                <li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
+                <li><a class="home" href="${createLink(uri: '/')}"><g:message code="Главная"/></a></li>
+                <li><g:link class="create" action="create"><g:message code="Добавить отель" args="[entityName]" /></g:link></li>
             </ul>
         </div>
-        <div id="list-hotel" class="content scaffold-list" role="main">
-            <h1><g:message code="default.list.label" args="[entityName]" /></h1>
-            <g:if test="${flash.message}">
-                <div class="message" role="status">${flash.message}</div>
-            </g:if>
-            <f:table collection="${hotelList}" />
-
-            <div class="pagination">
-                <g:paginate total="${hotelCount ?: 0}" />
-            </div>
-        </div>
+        <g:if test="${hotelList}" >
+                    <g:if test="${hotelList!=null}">
+                        <h1>Справочник отелей</h1>
+                    </g:if>
+                    <table>
+                        <tr>
+                            <th>Название отеля</th>
+                            <th>Звездность</th>
+                            <th>Страна</th>
+                            <th>Сайт</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        <g:each in="${hotelList}">
+                            <tr>
+                                <td>${it.hotelName}</td>
+                                <td>${it.hotelRating}</td>
+                                <td>${it.country}</td>
+                                    <g:if test="${it.webSite!=null}">
+                                        <td><g:link base="${it.webSite}">Перейти на сайт</g:link></td>
+                                    </g:if>
+                                    <g:else>
+                                       <td></td>
+                                    </g:else>
+                                <td><li><g:link class="edit" action="edit" resource="${it}"><g:message code="Редактировать" default="Редактировать" /></g:link></li></td>
+                                <td> <g:form resource="${it}" method="DELETE"><input class="delete" type="submit" value="${message(code: 'Удалить', default: 'Удалить')}"
+                                onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Вы уверены?')}');" />
+                                </g:form>
+                                </td>
+                            </tr>
+                        </g:each>
+                    </table>
+        </g:if>
+        <div class="pagination">
+                                <g:paginate total="${hotelCount}" />
+         </div>
     </body>
 </html>
